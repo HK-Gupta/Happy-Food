@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Happy Foods</string>
+    <string name="slogan">We bring food to your doorstep anytime, anywhere.</string>
+    <string name="developedBy">Developed by\nHarsh Kumar</string>
+    <string name="deliver_favourite_food">Deliver Favourite Food</string>
+    <string name="login_account">Login To Your Account</string>
+    <string name="create_account">Create New Account</string>
+    <string name="location_description">In order to enhance your dining experience, we kindly request your permission to access your device\'s location. Enabling the location service allows us to provide personalized restaurant recommendations, accurate delivery estimates, and ensure a smooth and seamless food delivery experience. </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_bar_hint">What do you want to eat?</string>
+    <string name="cancelled_delivery">Your order has been Cancelled Successfully</string>
+    <string name="out_for_delivery">Your Order is Out For Delivery</string>
+    <string name="delivered">Order Delivered Successfully</string>
+    <string name="congrats_your_order_is_placed">Congrats\nYour Order is Placed</string>
+</resources>
