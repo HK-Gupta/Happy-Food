@@ -21,29 +21,38 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/historyDishImage"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_profile"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/dishCard"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                app:cardCornerRadius="15dp"
+                android:src="@drawable/momos"
+                android:layout_marginLeft="5dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toStartOf="@id/historyDishName"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+                <ImageView
+                    android:id="@+id/historyDishImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/chole_bhature"
+                    android:scaleType="centerCrop"/>
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/historyDishName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="8dp"
                 android:fontFamily="@font/allan"
                 android:padding="10dp"
                 android:text="Dish Name"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/historyDishImage"
+                app:layout_constraintStart_toEndOf="@+id/dishCard"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView

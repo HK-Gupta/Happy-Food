@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.CongratsBottomSheet">
+    tools:context=".fragments.CongratsBottomSheet">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,8 +14,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="40dp"
             android:fontFamily="@font/felipa"
             android:text="@string/congrats_your_order_is_placed"
             android:textAlignment="center"
@@ -24,16 +24,18 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="270dp"
-            android:layout_height="270dp"
+            android:layout_width="200dp"
+            android:layout_height="180dp"
             android:layout_gravity="center"
             android:src="@drawable/congrats" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/gotoHome"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_margin="70dp"
+            android:layout_width="270dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="center"
             android:background="@drawable/button_background"
             android:text="Goto Home"
             android:textAllCaps="false"

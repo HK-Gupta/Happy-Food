@@ -1,4 +1,4 @@
-package com.example.happyfood.Fragments
+package com.example.happyfood.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

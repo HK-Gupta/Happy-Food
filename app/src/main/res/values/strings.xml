@@ -13,4 +13,7 @@
     <string name="out_for_delivery">Your Order is Out For Delivery</string>
     <string name="delivered">Order Delivered Successfully</string>
     <string name="congrats_your_order_is_placed">Congrats\nYour Order is Placed</string>
+    <string name="rupees">₹</string>
+
+    <string name="default_web_client_id">1019420542319-d4p1i58a77ecdkoura9i2ucmmravv7n4.apps.googleusercontent.com</string>
 </resources>

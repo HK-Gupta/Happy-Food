@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1019420542319",
+    "firebase_url": "https://happy-food-ecf6b-default-rtdb.firebaseio.com",
+    "project_id": "happy-food-ecf6b",
+    "storage_bucket": "happy-food-ecf6b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019420542319:android:60c5e710438ede7574549a",
+        "android_client_info": {
+          "package_name": "com.example.happyfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019420542319-d4p1i58a77ecdkoura9i2ucmmravv7n4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.happyfood",
+            "certificate_hash": "4258bcde3adc5caeb6f278d62c7476b5001019c3"
+          }
+        },
+        {
+          "client_id": "1019420542319-tr5ham5f68t736e01j6s7lndo29biuqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARtBbwFhRdprxC-PHTauEGS_3xU5E66Kc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019420542319-tr5ham5f68t736e01j6s7lndo29biuqe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

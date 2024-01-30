@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.happyfood.Fragments.BottomNavigationFragment
+import com.example.happyfood.fragments.BottomNavigationFragment
 import com.example.happyfood.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

@@ -1,11 +1,13 @@
-package com.example.happyfood.Fragments
+package com.example.happyfood.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.view.menu.MenuAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
@@ -14,9 +16,18 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.example.happyfood.R
 import com.example.happyfood.adapter.PopularAdapter
 import com.example.happyfood.databinding.FragmentHomeBinding
+import com.example.happyfood.model.MENU_NODE
+import com.example.happyfood.model.MenuItem
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var database: FirebaseDatabase
+    private lateinit var menuItems: MutableList<MenuItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,28 +58,48 @@ class HomeFragment : Fragment() {
             override fun doubleClick(position: Int) { }
 
             override fun onItemSelected(position: Int) {
-                val itemPosition = imageList[position]
                 val itemMessage = "Selected Image $position"
                 Toast.makeText(requireContext(), itemMessage, Toast.LENGTH_SHORT).show()
             }
         })
 
-        val foodName = listOf("Burger", "Pizza", "Momo", "Chole Bhature")
-        val foodPrice = listOf("₹70", "₹150", "₹40", "₹60")
-        val foodPic = listOf(R.drawable.burger, R.drawable.pizza,
-            R.drawable.momos, R.drawable.chole_bhature)
+        retrieveMenuItems()
 
-        val adapter = PopularAdapter(foodName, foodPrice, foodPic, requireContext())
+    }
+
+    private fun retrieveMenuItems() {
+        database = FirebaseDatabase.getInstance()
+        val foodRef: DatabaseReference = database.reference.child(MENU_NODE)
+        menuItems = mutableListOf()
+
+        // Retrieving menu items from database.
+        foodRef.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (foodSnapshot in snapshot.children) {
+                    val menuItem = foodSnapshot.getValue(MenuItem::class.java)
+                    menuItem?.let {
+                        menuItems.add(it)
+                    }
+                }
+                setAdapter()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+
+    }
+    private fun setAdapter() {
+        // Create a shuffled list of menu items.
+        val index = menuItems.indices.toList().shuffled()
+        val numbersToShow = minOf(7, menuItems.size)
+        val subsetMenu = index.take(numbersToShow).map { menuItems[it] }
+        val adapter = PopularAdapter(subsetMenu, requireContext())
         binding.popularRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.popularRecyclerView.adapter = adapter
-
-
-        binding.foodMenu.setOnClickListener {
-            findNavController().navigate(R.id.searchFragment
-            )
-        }
     }
-    companion object {
 
-    }
 }

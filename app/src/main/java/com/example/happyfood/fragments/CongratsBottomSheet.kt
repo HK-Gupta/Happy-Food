@@ -1,13 +1,11 @@
-package com.example.happyfood.Fragments
+package com.example.happyfood.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.happyfood.MainActivity
-import com.example.happyfood.R
 import com.example.happyfood.databinding.FragmentCongratsBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 

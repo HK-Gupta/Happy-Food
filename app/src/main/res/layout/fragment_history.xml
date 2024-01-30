@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.HistoryFragment">
+    tools:context=".fragments.HistoryFragment">
 
     <TextView
         android:id="@+id/textView8"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+        android:id="@+id/recentHistory"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:backgroundTint="@color/background"
@@ -36,29 +36,39 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/recentDishImage"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_profile"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/dishCard"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/momos"
+                app:cardCornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/recentDishName"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/recentDishImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/chole_bhature" />
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/recentDishName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="8dp"
                 android:fontFamily="@font/allan"
                 android:padding="10dp"
                 android:text="Dish Name"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/recentDishImage"
+                app:layout_constraintStart_toEndOf="@+id/dishCard"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -73,15 +83,28 @@
                 app:layout_constraintStart_toStartOf="@+id/recentDishName"
                 app:layout_constraintTop_toBottomOf="@+id/recentDishName" />
 
-            <ImageView
+            <Button
                 android:id="@+id/orderStatus"
-                android:layout_width="40dp"
+                android:layout_width="33dp"
                 android:layout_height="40dp"
-                android:layout_marginRight="25dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginRight="45dp"
+                android:backgroundTint="@color/grey_font"
+                app:layout_constraintBottom_toTopOf="@+id/receivedButton"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="@drawable/button_background" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/receivedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="39dp"
+                android:backgroundTint="@color/text_color2"
+                android:text="Received"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/orderStatus"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/orderStatus"
+                app:layout_constraintTop_toBottomOf="@+id/orderStatus" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -98,7 +121,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+        app:layout_constraintTop_toBottomOf="@+id/recentHistory" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/historyRecyclerView"
