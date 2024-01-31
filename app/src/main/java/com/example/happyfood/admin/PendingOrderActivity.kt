@@ -3,6 +3,7 @@ package com.example.happyfood.admin
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.happyfood.adapter.PendingOrderAdapter
@@ -116,17 +117,21 @@ class PendingOrderActivity : AppCompatActivity(), PendingOrderAdapter.OnItemClic
         val dispatchItemOrderReference = database.reference
             .child(COMPLETED_ORDER).child(dispatchItemPushKey!!)
         dispatchItemOrderReference.setValue(listOfOrderItem[position])
-            .addOnFailureListener {
+            .addOnSuccessListener {
                 deleteItemFromOrderDetails(dispatchItemPushKey)
             }
     }
 
     private fun deleteItemFromOrderDetails(dispatchItemPushKey: String) {
         val orderItemReference = database.reference.child(ORDER_DETAILS).child(dispatchItemPushKey)
-        orderItemReference.removeValue().addOnSuccessListener {
-            Toast.makeText(this, "Order Dispatched Successfully", Toast.LENGTH_SHORT).show()
-        }.addOnFailureListener {
-            Toast.makeText(this, "Something Went Wrong!", Toast.LENGTH_SHORT).show()
+        Log.d("ItemPushKey", dispatchItemPushKey)
+        orderItemReference.removeValue().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(this, "Order Dispatched Successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Something Went Wrong!", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 

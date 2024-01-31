@@ -71,5 +71,7 @@ class DeliveryStatusActivity : AppCompatActivity() {
         }
 
         val adapter = AdminDeliveryAdapter(customerName, paymentReceived)
+        binding.deliveryRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.deliveryRecyclerView.adapter = adapter
     }
 }

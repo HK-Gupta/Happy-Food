@@ -31,6 +31,7 @@ class AdminMainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         database = FirebaseDatabase.getInstance()
+        auth = FirebaseAuth.getInstance()
 
         binding.pendingOrders.setOnClickListener {
             startActivity(Intent(this, PendingOrderActivity::class.java))
@@ -52,7 +53,8 @@ class AdminMainActivity : AppCompatActivity() {
             startActivity(Intent(this, SignupActivity::class.java))
         }
         binding.logout.setOnClickListener {
-            startActivity(Intent(this, StartActivity::class.java))
+            auth.signOut()
+            startActivity(Intent(this, AdminLoginActivity::class.java))
             finish()
         }
 

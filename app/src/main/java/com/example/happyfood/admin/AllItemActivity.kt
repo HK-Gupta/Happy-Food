@@ -3,6 +3,7 @@ package com.example.happyfood.admin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.happyfood.adapter.AdminMenuItemAdapter
 import com.example.happyfood.databinding.ActivityAllItemBinding
@@ -58,8 +59,24 @@ class AllItemActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        val adapter = AdminMenuItemAdapter(this, menuItems, databaseReference)
+        val adapter = AdminMenuItemAdapter(this, menuItems, databaseReference) {
+            deleteMenuItems(it)
+        }
         binding.itemRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.itemRecyclerView.adapter = adapter
+    }
+
+    private fun deleteMenuItems(position: Int) {
+        val menuItemToDelete = menuItems[position]
+        val menuItemKey = menuItemToDelete.key
+        val foodMenuReference = database.reference.child(MENU_NODE).child(menuItemKey!!)
+        foodMenuReference.removeValue().addOnCompleteListener {
+            if(it.isSuccessful) {
+                menuItems.removeAt(position)
+                binding.itemRecyclerView.adapter?.notifyItemRemoved(position)
+            } else {
+                Toast.makeText(this, "Failed To Delete", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
