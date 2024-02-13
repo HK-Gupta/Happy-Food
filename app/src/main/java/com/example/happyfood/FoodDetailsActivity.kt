@@ -10,7 +10,6 @@ import com.example.happyfood.databinding.ActivityFoodDetailsBinding
 import com.example.happyfood.model.CART_ITEMS
 import com.example.happyfood.model.CartModel
 import com.example.happyfood.model.USER_NODE
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase

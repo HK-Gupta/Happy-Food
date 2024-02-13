@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.denzcoskun.imageslider.animations.Toss
-import com.example.happyfood.R
 import com.example.happyfood.RecentOrderItems
 import com.example.happyfood.adapter.HistoryAdapter
 import com.example.happyfood.databinding.FragmentHistoryBinding
@@ -36,15 +33,11 @@ class HistoryFragment : Fragment() {
     private lateinit var userId: String
     private var listOfOrderItem: ArrayList<OrderDetailsModel> = arrayListOf()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentHistoryBinding.inflate(layoutInflater, container, false)
 
@@ -73,7 +66,7 @@ class HistoryFragment : Fragment() {
     }
 
     private fun seeRecentBuyItems() {
-        listOfOrderItem.firstOrNull()?.let { recentBuy->
+        listOfOrderItem.firstOrNull()?.let {
             val intent = Intent(requireContext(), RecentOrderItems::class.java)
             intent.putExtra("RecentBuyItems", listOfOrderItem)
             startActivity(intent)

@@ -2,7 +2,6 @@ package com.example.happyfood
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.example.happyfood.fragments.CongratsBottomSheet
 import com.example.happyfood.databinding.ActivityPaymentBinding
@@ -12,7 +11,6 @@ import com.example.happyfood.model.ORDER_HISTORY
 import com.example.happyfood.model.OrderDetailsModel
 import com.example.happyfood.model.USER_NODE
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -52,7 +50,7 @@ class PaymentActivity : AppCompatActivity() {
         buyFoodQuantity = intent.getIntegerArrayListExtra("BuyFoodQuantity") as ArrayList<Int>
 
 
-        totalAmount = calculateTotalAmmount().toString()
+        totalAmount = calculateTotalAmount().toString()
         binding.totalAmount.text = "₹ $totalAmount"
 
         binding.orderPlaced.setOnClickListener {
@@ -99,8 +97,8 @@ class PaymentActivity : AppCompatActivity() {
         cartItemReference.removeValue()
     }
 
-    private fun calculateTotalAmmount(): Int {
-        var amount = 0;
+    private fun calculateTotalAmount(): Int {
+        var amount = 0
 
         for(i in 0 until buyFoodPrice.size) {
             val price = buyFoodPrice[i]
@@ -111,7 +109,7 @@ class PaymentActivity : AppCompatActivity() {
                 price.toInt()
             }
 
-            var quantity = buyFoodQuantity[i]
+            val quantity = buyFoodQuantity[i]
             amount += priceValue*quantity
         }
 

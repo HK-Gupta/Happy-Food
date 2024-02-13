@@ -9,7 +9,7 @@
         android:layout_height="90dp"
         app:cardCornerRadius="18dp"
         app:cardElevation="5dp"
-        android:layout_margin="12dp"
+        android:layout_margin="@dimen/card_item_margin"
         android:backgroundTint="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,10 +26,9 @@
                 android:layout_height="75dp"
                 android:layout_marginLeft="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/momos"
                 app:cardCornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/dishName"
+                app:layout_constraintEnd_toStartOf="@id/customerName"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 

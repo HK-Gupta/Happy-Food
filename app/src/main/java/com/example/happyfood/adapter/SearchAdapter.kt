@@ -3,11 +3,9 @@ package com.example.happyfood.adapter
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.happyfood.FoodDetailsActivity
-import com.example.happyfood.databinding.PopuarItemBinding
 import com.example.happyfood.databinding.SearchItemBinding
 
 class SearchAdapter(private val items: MutableList<String>, private val prices: MutableList<String>, private val images: MutableList<Int>, private val requireContext: Context) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder> () {

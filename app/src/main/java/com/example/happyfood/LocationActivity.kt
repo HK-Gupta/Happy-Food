@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import com.example.happyfood.databinding.ActivityLocationBinding
-import com.example.happyfood.databinding.ActivityLoginBinding
 
 class LocationActivity : AppCompatActivity() {
 

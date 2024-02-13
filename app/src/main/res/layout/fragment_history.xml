@@ -42,7 +42,6 @@
                 android:layout_height="75dp"
                 android:layout_marginLeft="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/momos"
                 app:cardCornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/recentDishName"
@@ -54,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/chole_bhature" />
+                    android:src="@drawable/burger" />
             </androidx.cardview.widget.CardView>
 
             <TextView

@@ -6,15 +6,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.happyfood.databinding.ActivityAddItemBinding
 import com.example.happyfood.databinding.CartItemBinding
 import com.example.happyfood.model.AllMenu
-import com.google.firebase.database.DatabaseReference
 
 class AdminMenuItemAdapter(
     private val context: Context,
     private val menuList: ArrayList<AllMenu>,
-    databaseReference: DatabaseReference,
     private val onDeleteClickListener:(position: Int) ->Unit
 ): RecyclerView.Adapter<AdminMenuItemAdapter.AdminAddItemViewHolder> (){
 
@@ -46,18 +43,19 @@ class AdminMenuItemAdapter(
 
                 addBtnCart.setOnClickListener {
                     if(itemQuantities[position] < 10) {
-                        itemQuantities[position]++;
+                        itemQuantities[position]++
                         quantity.text = itemQuantities[position].toString()
                     }
                 }
                 subtractBtnCart.setOnClickListener {
                     if(itemQuantities[position] > 1) {
-                        itemQuantities[position]--;
+                        itemQuantities[position]--
                         quantity.text = itemQuantities[position].toString()
                     }
                 }
                 deleteBtn.setOnClickListener {
                     onDeleteClickListener(position)
+                    deleteItem(position) // Edited
                 }
             }
         }

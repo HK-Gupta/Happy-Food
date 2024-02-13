@@ -1,6 +1,7 @@
 package com.example.happyfood.model
 
 //9:00 delete order details adapter
+// change the sign in intent  activity
 const val ADMIN_USER_NODE = "AdminUser"
 const val MENU_NODE = "Menu"
 const val MENU_IMAGE = "MenuImages"
@@ -10,3 +11,4 @@ const val ORDER_DETAILS = "OrderDetails"
 const val ORDER_HISTORY = "OrderHistory"
 const val ACCEPTED_ORDER = "orderAccept"
 const val COMPLETED_ORDER = "CompleteOrder"
+const val SHARED_PREFERENCE_KEY = "LoginDetails"

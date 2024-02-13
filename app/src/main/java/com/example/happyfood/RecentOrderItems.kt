@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.happyfood.adapter.RecentBuyAdapter
 import com.example.happyfood.databinding.ActivityRecentOrderItemsBinding
-import com.example.happyfood.databinding.RecentBuyItemBinding
 import com.example.happyfood.model.OrderDetailsModel
 
 class RecentOrderItems : AppCompatActivity() {

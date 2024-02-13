@@ -4,9 +4,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.happyfood.R
 import com.example.happyfood.databinding.ActivityAddItemBinding
 import com.example.happyfood.model.AllMenu
 import com.example.happyfood.model.MENU_IMAGE

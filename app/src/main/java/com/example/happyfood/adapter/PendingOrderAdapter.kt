@@ -4,7 +4,6 @@ import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -36,7 +35,7 @@ class PendingOrderAdapter (
     }
 
     inner class PendingOrderViewHolder(private val binding: PendingItemsBinding): RecyclerView.ViewHolder(binding.root) {
-        private var isAccepted = false;
+        private var isAccepted = false
         fun bind(position: Int) {
             binding.apply {
                 customerName.text = customerNames[position]
@@ -45,7 +44,7 @@ class PendingOrderAdapter (
                 Glide.with(context).load(uri).into(foodImage)
 
                 acceptOrder.apply {
-                    if(!isAccepted) {
+                    if (!isAccepted) {
                         text = "Accept"
                     } else {
                         text = "Dispatch"

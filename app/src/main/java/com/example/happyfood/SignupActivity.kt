@@ -1,10 +1,12 @@
 package com.example.happyfood
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.happyfood.databinding.ActivitySignupBinding
@@ -19,7 +21,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.database
 
 class SignupActivity : AppCompatActivity() {
@@ -30,6 +31,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var name: String
     private lateinit var email: String
     private lateinit var password: String
+    private lateinit var dialog: Dialog
 
     private val binding by lazy {
         ActivitySignupBinding.inflate(layoutInflater)
@@ -46,6 +48,8 @@ class SignupActivity : AppCompatActivity() {
         database = Firebase.database.reference
         googleSigIn = GoogleSignIn.getClient(this, googleSignInOptions)
 
+        setupProgressBar()
+
         binding.signupBtn.setOnClickListener {
             name = binding.name.text.toString().trim()
             email = binding.email.text.toString().trim()
@@ -53,13 +57,16 @@ class SignupActivity : AppCompatActivity() {
             if (email.isEmpty() || name.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Kindly Fill All the Details ", Toast.LENGTH_SHORT).show()
             } else {
+                dialog.show()
                 createAccount(email, password, name)
             }
         }
 
         binding.googleBtn.setOnClickListener {
+            dialog.show()
             val signIntent = googleSigIn.signInIntent
             launcher.launch(signIntent)
+            dialog.dismiss()
         }
 
         binding.gotoLogin.setOnClickListener {
@@ -92,6 +99,7 @@ class SignupActivity : AppCompatActivity() {
     }
     private fun createAccount(email: String, password: String, name: String) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {task->
+            dialog.dismiss()
             if (task.isSuccessful) {
                 Toast.makeText(this, "Account created Successfully /nKindly Choose Location", Toast.LENGTH_SHORT).show()
                 saveUserData(email, password, name)
@@ -108,5 +116,12 @@ class SignupActivity : AppCompatActivity() {
         val user = UserModel(email, password, name)
         val userID = FirebaseAuth.getInstance().currentUser!!.uid
         database.child(USER_NODE).child(userID).setValue(user)
+    }
+
+    private fun setupProgressBar() {
+        dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.progress_bar)
+        dialog.setCancelable(false)
     }
 }

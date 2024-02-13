@@ -8,7 +8,7 @@
         android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:layout_margin="12dp"
+        android:layout_margin="@dimen/card_item_margin"
         android:backgroundTint="@color/background"
         app:cardCornerRadius="18dp"
         app:cardElevation="5dp"
@@ -26,7 +26,6 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 app:cardCornerRadius="15dp"
-                android:src="@drawable/momos"
                 android:layout_marginLeft="5dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toStartOf="@id/historyDishName"
@@ -37,7 +36,7 @@
                     android:id="@+id/historyDishImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/chole_bhature"
+                    android:src="@drawable/burger"
                     android:scaleType="centerCrop"/>
             </androidx.cardview.widget.CardView>
 

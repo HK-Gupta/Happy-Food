@@ -1,12 +1,18 @@
 package com.example.happyfood
 
 import android.app.Activity
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.happyfood.databinding.ActivityLoginBinding
+import com.example.happyfood.model.SHARED_PREFERENCE_KEY
+import com.example.happyfood.model.USER_NODE
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -16,10 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.database
-import java.net.PasswordAuthentication
-import kotlin.math.sign
 
 class LoginActivity : AppCompatActivity() {
 
@@ -28,6 +31,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var dialog: Dialog
+    private lateinit var sharedPreferences: SharedPreferences
 
     private val binding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
@@ -43,6 +48,11 @@ class LoginActivity : AppCompatActivity() {
         database = Firebase.database.reference
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
 
+        // Setting the Value of shared Preferences.
+        sharedPreferences = this@LoginActivity.getSharedPreferences(SHARED_PREFERENCE_KEY, Context.MODE_PRIVATE)
+
+        setupProgressBar()
+
         binding.loginBtn.setOnClickListener {
             email = binding.email.text.toString().trim()
             password = binding.password.text.toString().trim()
@@ -50,8 +60,10 @@ class LoginActivity : AppCompatActivity() {
             if(email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Kindly enter all details", Toast.LENGTH_SHORT).show()
             } else {
+                dialog.show()
                 loginUser(email, password)
                 Toast.makeText(this, "Logged in Successfully", Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
             }
         }
 
@@ -61,6 +73,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.googleBtn.setOnClickListener {
+            dialog.show()
             val signIntent = googleSignInClient.signInIntent
             launcher.launch(signIntent)
         }
@@ -91,12 +104,26 @@ class LoginActivity : AppCompatActivity() {
     }
     private fun loginUser(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task->
+            dialog.dismiss()
             if(task.isSuccessful) {
+
+                // Save the login details in the user.
+                val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                editor.putString(SHARED_PREFERENCE_KEY, USER_NODE)
+                editor.apply()
+
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
                 Toast.makeText(this, "Account Doesn't Exist", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun setupProgressBar() {
+        dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.progress_bar)
+        dialog.setCancelable(false)
     }
 }

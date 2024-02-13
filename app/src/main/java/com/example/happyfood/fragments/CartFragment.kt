@@ -9,19 +9,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.happyfood.PaymentActivity
-import com.example.happyfood.R
 import com.example.happyfood.adapter.CartAdapter
 import com.example.happyfood.databinding.FragmentCartBinding
 import com.example.happyfood.model.CART_ITEMS
 import com.example.happyfood.model.CartModel
-import com.example.happyfood.model.MenuItem
 import com.example.happyfood.model.USER_NODE
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.getValue
 
 class CartFragment : Fragment() {
 
@@ -34,15 +31,12 @@ class CartFragment : Fragment() {
     private lateinit var foodImage: MutableList<String>
     private lateinit var quantity: MutableList<Int>
     private lateinit var adapter: CartAdapter
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentCartBinding.inflate(inflater, container, false)
 

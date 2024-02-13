@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.happyfood.databinding.CartItemBinding
 import com.example.happyfood.model.CART_ITEMS
-import com.example.happyfood.model.CartModel
-import com.example.happyfood.model.MenuItem
 import com.example.happyfood.model.USER_NODE
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -19,7 +17,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlin.math.log
 
 class CartAdapter(private val cartItems: MutableList<String>,
                   private val cartItemsPrice: MutableList<String>,
@@ -66,7 +63,6 @@ class CartAdapter(private val cartItems: MutableList<String>,
             binding.apply {
                 dishName.text = cartItems[position]
                 dishPrice.text = cartItemsPrice[position]
-                val quantity = cartQuantity[position]
 
                 val uriString = cartImage[position]
                 Log.d("image", "Food Url: $uriString")

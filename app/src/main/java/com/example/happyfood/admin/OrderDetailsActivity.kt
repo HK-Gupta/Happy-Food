@@ -2,11 +2,8 @@ package com.example.happyfood.admin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcelable
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.happyfood.R
 import com.example.happyfood.adapter.OrderDetailsAdapter
-import com.example.happyfood.adapter.RecentBuyAdapter
 import com.example.happyfood.databinding.ActivityOrderDetailsBinding
 import com.example.happyfood.model.OrderDetailsModel
 

@@ -14,15 +14,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class BottomNavigationFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentBottonNavigationBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentBottonNavigationBinding.inflate(layoutInflater, container, false)
 
@@ -37,7 +32,4 @@ class BottomNavigationFragment : BottomSheetDialogFragment() {
         return binding.root
     }
 
-    companion object {
-
-    }
 }

@@ -3,7 +3,6 @@ package com.example.happyfood.admin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.happyfood.R
 import com.example.happyfood.adapter.AdminDeliveryAdapter
 import com.example.happyfood.databinding.ActivityDeliveryStatusBinding
 import com.example.happyfood.model.COMPLETED_ORDER
@@ -12,7 +11,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.getValue
 
 class DeliveryStatusActivity : AppCompatActivity() {
 

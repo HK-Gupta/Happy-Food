@@ -59,7 +59,7 @@ class AllItemActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        val adapter = AdminMenuItemAdapter(this, menuItems, databaseReference) {
+        val adapter = AdminMenuItemAdapter(this, menuItems) {
             deleteMenuItems(it)
         }
         binding.itemRecyclerView.layoutManager = LinearLayoutManager(this)

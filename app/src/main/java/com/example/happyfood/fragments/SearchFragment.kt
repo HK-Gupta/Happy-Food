@@ -23,15 +23,11 @@ class SearchFragment : Fragment() {
     private lateinit var adapter: PopularAdapter
     private lateinit var totalMenuItems: MutableList<MenuItem>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(inflater, container, false)
 
@@ -46,6 +42,7 @@ class SearchFragment : Fragment() {
 
     private fun retrieveMenuItemFromDatabase() {
         database = FirebaseDatabase.getInstance()
+        totalMenuItems = mutableListOf()
         val foodReference = database.reference.child(MENU_NODE)
         foodReference.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {

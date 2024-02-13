@@ -40,13 +40,16 @@ class AdminProfileActivity : AppCompatActivity() {
             btnSave.isEnabled = false
         }
 
+        binding.emailEdt.setOnClickListener {
+            Toast.makeText(this, "Email can't be Edited", Toast.LENGTH_SHORT).show()
+        }
+
         var isEnable = false
         binding.editProfile.setOnClickListener {
             isEnable = !isEnable
             binding.name.isEnabled = isEnable
             binding.restaurantName.isEnabled = isEnable
             binding.address.isEnabled = isEnable
-            binding.email.isEnabled = isEnable
             binding.number.isEnabled = isEnable
             binding.password.isEnabled = isEnable
             binding.btnSave.isEnabled = isEnable

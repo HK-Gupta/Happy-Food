@@ -62,4 +62,6 @@ dependencies {
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
     //Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    // Custamizable Progress Bar
+    implementation("com.jpardogo.googleprogressbar:library:1.2.0")
 }

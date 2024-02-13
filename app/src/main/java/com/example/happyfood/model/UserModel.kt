@@ -1,6 +1,5 @@
 package com.example.happyfood.model
 
-import android.provider.ContactsContract.CommonDataKinds.Email
 
 data class UserModel (
     val email: String? = null,

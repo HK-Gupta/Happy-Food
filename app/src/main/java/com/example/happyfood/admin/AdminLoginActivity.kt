@@ -1,14 +1,20 @@
 package com.example.happyfood.admin
 
 import android.app.Activity
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.happyfood.MainActivity
 import com.example.happyfood.R
 import com.example.happyfood.databinding.ActivityAdminLoginBinding
+import com.example.happyfood.model.ADMIN_USER_NODE
+import com.example.happyfood.model.SHARED_PREFERENCE_KEY
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -27,6 +33,8 @@ class AdminLoginActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var googleSingIn: GoogleSignInClient
+    private lateinit var dialog: Dialog
+    private lateinit var sharedPreferences: SharedPreferences
 
     private val binding by lazy {
         ActivityAdminLoginBinding.inflate(layoutInflater)
@@ -44,6 +52,11 @@ class AdminLoginActivity : AppCompatActivity() {
         // Initialising SignIn using Google
         googleSingIn = GoogleSignIn.getClient(this, googleSignInOptions)
 
+        // Shared Preferences
+        sharedPreferences = this@AdminLoginActivity.getSharedPreferences(SHARED_PREFERENCE_KEY, Context.MODE_PRIVATE)
+
+        setupProgressBar()
+
         binding.loginBtn.setOnClickListener {
 
             email = binding.email.text.toString().trim()
@@ -52,20 +65,30 @@ class AdminLoginActivity : AppCompatActivity() {
             if(email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Kindly Fill all the fields", Toast.LENGTH_SHORT).show()
             } else{
+                dialog.show()
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task->
                     if(task.isSuccessful) {
+
+                        // Save the login details in the admin user.
+                        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                        editor.putString(SHARED_PREFERENCE_KEY, ADMIN_USER_NODE)
+                        editor.apply()
+
                         startActivity(Intent(this, AdminMainActivity::class.java))
                         finish()
                     } else {
                         Toast.makeText(this, "Account Doesn't Exist", Toast.LENGTH_SHORT).show()
                     }
+                    dialog.dismiss()
                 }
             }
         }
 
         binding.googleBtn.setOnClickListener {
+            dialog.show()
             val signInIntent = googleSingIn.signInIntent
             launcher.launch(signInIntent)
+            dialog.dismiss()
         }
 
         binding.gotoSignup.setOnClickListener {
@@ -94,5 +117,12 @@ class AdminLoginActivity : AppCompatActivity() {
         }else {
             Toast.makeText(this, "Log In Failed!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun setupProgressBar() {
+        dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.progress_bar)
+        dialog.setCancelable(false)
     }
 }

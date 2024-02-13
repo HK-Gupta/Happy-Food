@@ -1,10 +1,13 @@
 package com.example.happyfood.admin
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.example.happyfood.R
 import com.example.happyfood.model.ADMIN_USER_NODE
 import com.example.happyfood.model.AdminUserModel
 import com.example.happyfood.databinding.ActivityAdminSignupBinding
@@ -22,6 +25,7 @@ class AdminSignupActivity : AppCompatActivity() {
     private lateinit var password: String
     private lateinit var userName: String
     private lateinit var restaurantName: String
+    private lateinit var dialog: Dialog
 
     private val binding by lazy {
         ActivityAdminSignupBinding.inflate(layoutInflater)
@@ -34,6 +38,8 @@ class AdminSignupActivity : AppCompatActivity() {
         auth = Firebase.auth
         database = Firebase.database.reference
 
+        setupProgressBar()
+
         binding.createUser.setOnClickListener {
             email = binding.email.text.toString().trim()
             password = binding.password.text.toString().trim()
@@ -43,11 +49,12 @@ class AdminSignupActivity : AppCompatActivity() {
             if(email.isEmpty() || password.isEmpty() || userName.isEmpty() || restaurantName.isEmpty()) {
                 Toast.makeText(this, "Kindly Fill all the fields", Toast.LENGTH_SHORT).show()
             } else {
+                dialog.show()
                 createAccount(email, password, userName, restaurantName)
             }
         }
 
-        val locationList = arrayOf("Delhi", "Mumbai", "Kolkata", "Chennai");
+        val locationList = arrayOf("Delhi", "Mumbai", "Kolkata", "Chennai")
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, locationList)
         binding.listOfLocation.setAdapter(adapter)
 
@@ -67,6 +74,7 @@ class AdminSignupActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Something went wrong \nPlease Try Again", Toast.LENGTH_LONG).show()
             }
+            dialog.dismiss()
         }
     }
 
@@ -74,5 +82,12 @@ class AdminSignupActivity : AppCompatActivity() {
         val user = AdminUserModel(email, password, userName, restaurantName)
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
         database.child(ADMIN_USER_NODE).child(userId).setValue(user)
+    }
+
+    private fun setupProgressBar() {
+        dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.progress_bar)
+        dialog.setCancelable(false)
     }
 }

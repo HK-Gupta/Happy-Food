@@ -1,19 +1,18 @@
 package com.example.happyfood.admin
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.happyfood.R
 import com.example.happyfood.SignupActivity
-import com.example.happyfood.StartActivity
 import com.example.happyfood.databinding.ActivityAdminMainBinding
 import com.example.happyfood.model.COMPLETED_ORDER
 import com.example.happyfood.model.ORDER_DETAILS
 import com.example.happyfood.model.OrderDetailsModel
+import com.example.happyfood.model.SHARED_PREFERENCE_KEY
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
@@ -54,6 +53,10 @@ class AdminMainActivity : AppCompatActivity() {
         }
         binding.logout.setOnClickListener {
             auth.signOut()
+            val sharedPreferences = this@AdminMainActivity.getSharedPreferences(SHARED_PREFERENCE_KEY, Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.remove(SHARED_PREFERENCE_KEY)
+            editor.apply()
             startActivity(Intent(this, AdminLoginActivity::class.java))
             finish()
         }
@@ -65,12 +68,12 @@ class AdminMainActivity : AppCompatActivity() {
 
     private fun wholeTimeEarning() {
         val completedOrderReference = database.reference.child(COMPLETED_ORDER)
-        var listOfTotalPay = mutableListOf<Int>()
+        val listOfTotalPay = mutableListOf<Int>()
 
         completedOrderReference.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 for( foodSnapshot in snapshot.children ) {
-                    var totalOrders = foodSnapshot.getValue(OrderDetailsModel::class.java)
+                    val totalOrders = foodSnapshot.getValue(OrderDetailsModel::class.java)
                     totalOrders?.totalPrice?.replace("₹", "")?.toIntOrNull()?.let {
                         listOfTotalPay.add(it)
                     }
@@ -116,5 +119,6 @@ class AdminMainActivity : AppCompatActivity() {
 
         })
     }
+
 
 }
